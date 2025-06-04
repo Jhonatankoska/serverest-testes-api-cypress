@@ -6,7 +6,7 @@ Este projeto tem como objetivo automatizar testes de API utilizando [Cypress](ht
 
 ## Funcionalidades Testadas
 
-Os testes implementados cobrem os principais endpoints da API de usuários:
+Os testes implementados cobrem os principais endpoints da API de usuários, bem como cenários negativos:
 
 - **POST /usuarios**: Criação de novo usuário.
 - **POST /login**: Autenticação e obtenção de token JWT.
@@ -14,6 +14,10 @@ Os testes implementados cobrem os principais endpoints da API de usuários:
 - **GET /usuarios/{id}**: Consulta de usuário específico por ID.
 - **PUT /usuarios/{id}**: Atualização de usuário existente (com token).
 - **DELETE /usuarios/{id}**: Exclusão de usuário (com token).
+- **POST /usuarios**: Criar um usuário com email já existente.
+- **GET /usuarios/{id}**: Não deve obter usuário com ID inválido.
+- **PUT /usuarios/{id}**: Não deve permitir atualizar o usuário com um email já cadastrado.
+- **POST /login**: Não deve fazer login com senha incorreta.
 
 ---
 
@@ -91,10 +95,12 @@ Este projeto possui integração com **GitHub Actions**, que executa os testes a
 │       └── cypress-api.yml
 ├── cypress/
 │   ├── e2e/
-│   │   └── serverestApi.cy.js
+│   │   └── serverestApiNeg.cy.js
+│   │   └── serverestApiPos.cy.js
 │   ├── reports/
 │   │   └── mochawesome.html
-│   └── support/
+│   ├── support/
+│   │   └──commands.js
 │       └── e2e.js
 ├── cypress.config.js
 ├── package.json
